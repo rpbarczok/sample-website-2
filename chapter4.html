@@ -1,0 +1,41 @@
+ <!DOCTYPE html>
+<html>
+	<head>
+		<script>
+			function loadXMLDoc(filename)
+			{
+				  {
+			  xhttp = new XMLHttpRequest();
+			  }
+			xhttp.open("GET", filename, false);
+			try {xhttp.responseType = "msxml-document"} catch(err) {} // Helping IE11
+			xhttp.send("");
+			return xhttp.responseXML;
+			}
+
+			function displayResult(witness)
+			{
+			xml = loadXMLDoc("chapter4.xml");
+			xsl = loadXMLDoc("chapter4.xsl");
+      // https://stackoverflow.com/questions/3955229/remove-all-child-elements-of-a-dom-node-in-javascript
+        var chater4 = document.getElementById("chapter4");
+        while (chapter4.firstChild) {
+          chapter4.removeChild(chapter4.firstChild);
+        }
+			// code for Chrome, Firefox, Opera, etc.
+			  {
+			var xsltProcessor = new XSLTProcessor ();
+			xsltProcessor.importStylesheet(xsl);
+
+			xsltProcessor.setParameter(null, "witness", witness);
+  			resultDocument = xsltProcessor.transformToFragment(xml, document);
+  			chapter4.appendChild(resultDocument);
+			  }
+			}
+		</script>
+    <meta charset="utf-8">
+	   </head>
+	<body onload="displayResult('V')">
+		<div id="chapter4" />
+	</body>
+</html>
